@@ -18,8 +18,8 @@ The placement also introduced a level of professional interaction that could not
 
 The official SIWES materials supplied for this report also framed industrial training as a means of connecting academic preparation with practical experience. I therefore treated the attachment as an opportunity to examine how the skills acquired in the university were applied, adjusted, and extended within a professional architectural environment.
 
-[FIGURE 1: INSERT COMPANY LOGO HERE]
-Caption below figure: Moe + Art Architecture company logo supplied for the report.
+[FIGURE 1.1: INSERT COMPANY LOGO HERE]
+Caption below figure: Figure 1.1: Moe + Art Architecture company logo supplied for the report.
 
 ## [Heading 2] 1.2 Internship Profile and Objectives
 
@@ -82,8 +82,8 @@ The placement documents also identified Moebetter Limited as the formal corporat
 
 The confirmed office address was 59 Raymond Njoku Street, Ikoyi, Lagos State. The address appeared in the placement information and was also visible in the work-calendar evidence supplied for the attachment.
 
-[PLATE 1: INSERT COMPANY IDENTIFICATION PHOTOGRAPH HERE]
-Caption below plate: Company identification photograph showing the Moe + Art Architecture and AWCA wall signage.
+[PLATE 1.1: INSERT COMPANY IDENTIFICATION PHOTOGRAPH HERE]
+Caption below plate: Plate 1.1: Company identification photograph showing the Moe + Art Architecture and AWCA wall signage.
 
 ### [Heading 3] 1.3.2 History and development
 
@@ -174,8 +174,8 @@ Concert Site Design was an official company assignment in which I assisted with 
 
 The Barge Project was a separate company project from the Federal Palace Hotel and Casino work. My confirmed activities included observation, site documentation, material arrangement, installation support, and boat-related activities. The project was therefore treated separately from the Federal Palace floating restaurant.
 
-[FIGURE 2: INSERT IKEJA CONTEXT-MAPPING IMAGE HERE]
-Caption below figure: Ikeja context mapping used in connection with an actual company project.
+[FIGURE 1.2: INSERT IKEJA CONTEXT-MAPPING IMAGE HERE]
+Caption below figure: Figure 1.2: Ikeja context mapping used in connection with an actual company project.
 
 ### [Heading 3] 1.5.2 Charles Pictet House and digital design exercises
 
@@ -193,13 +193,24 @@ The high-rise model was identified as a training exercise. The Banana Island mod
 
 In addition to the named projects, the logbook recorded activities relating to Rhino 7 modelling, Revit 2023 drafting and modelling, AutoCAD floor-plan work, Twinmotion rendering, interior and spatial design, site inspections, measurements, renovation, and presentation work. These activities were treated as work I personally carried out or assisted with, while the description of my level of responsibility remained limited to the evidence available.
 
-[PLATE 2: INSERT SELECTED SITE-AND-PROJECT DOCUMENTATION PHOTOGRAPH HERE]
-Caption below plate: Selected site and project documentation from the internship materials.
+[PLATE 1.2: INSERT SELECTED SITE-AND-PROJECT DOCUMENTATION PHOTOGRAPH HERE]
+Caption below plate: Plate 1.2: Selected site and project documentation from the internship materials.
 
 ## [Heading 2] 1.6 Organisation of the Report
 
 The report was organised into four chapters, followed by the References section. Chapter One introduced the SIWES attachment, presented my student and placement information, described Moe + Art Architecture, explained the evidence used, and outlined the projects and assignments. Chapter Two discussed the facilities available to me, including the office resources, software, digital modelling facilities, visualisation tools, site documentation resources, and safety-related resources. Chapter Three discussed my contributions, the projects on which I worked or assisted, the relationship between academic knowledge and professional practice, supervision, workplace culture, and the challenges recorded in the logbook. Chapter Four presented the conclusion and recommendations arising from the training experience. The References section was reserved for the official SIWES materials, relevant academic and technical sources, company-history sources supplied for the report, and official software documentation.
 
 This structure allowed the report to move from the background of the training to the facilities that supported the work, the contributions and challenges that shaped the experience, and the conclusions drawn from the attachment.
+
+## [Heading 2] 1.7 Items to Insert Before Final Submission
+
+The following items were marked for insertion because the corresponding image files or formal diagram were not available to the Word-generation workspace. They were not treated as facts beyond the descriptions already confirmed:
+
+1. [INSERT FIGURE: Moe + Art Architecture company logo. Use the clearest supplied logo image. Place it centred in the position marked for Figure 1.1, with the title below the image.]
+2. [INSERT PLATE: Clearest supplied photograph showing David with the Moe + Art Architecture, AWCA, and A Whitespace Creative Art Foundation wall signage. Place it centred in the position marked for Plate 1.1, with the title below the image.]
+3. [INSERT FIGURE: Ikeja/CADMapper context map used in connection with an actual company project. Place it centred in the position marked for Figure 1.2, with the title below the image.]
+4. [INSERT PLATE: One clear office, site, or project-documentation photograph selected from the supplied materials. Place it centred in the position marked for Plate 1.2, with the title below the image.]
+5. [INSERT FIGURE: Formal company organogram, if one is supplied by the company. If no formal organogram is available, retain Table 2 and do not create one from assumption.]
+6. [INSERT REFERENCE: Complete IEEE entries for the official SIWES guidance document and the company-history sources supplied for this chapter.]
 
 [END OF CHAPTER ONE]
