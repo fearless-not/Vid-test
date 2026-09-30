@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SIWES Chapter One PDF Viewer</title>
+  <style>
+    :root {
+      --ink: #1e1c1a;
+      --muted: #706c67;
+      --line: #e4ddd6;
+      --paper: #fffdfb;
+      --cream: #f7f2ec;
+      --accent: #c8102e;
+      --accent-dark: #8e0d22;
+      --soft-red: #fff0f2;
+      --shadow: 0 18px 55px rgba(49, 34, 23, .12);
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, a { font: inherit; }
+    button { cursor: pointer; }
+    .app-shell { min-height: 100%; display: flex; flex-direction: column; }
+    .topbar {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 0 30px;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 13px; min-width: 0; }
+    .brand-mark {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: grid; place-items: center;
+      color: white; background: var(--accent);
+      font-family: Georgia, serif; font-size: 20px; font-style: italic;
+      box-shadow: 0 5px 15px rgba(200, 16, 46, .25);
+    }
+    .brand-copy { min-width: 0; }
+    .brand-copy strong { display: block; font-size: 15px; letter-spacing: .02em; }
+    .brand-copy span { display: block; margin-top: 2px; color: var(--muted); font-size: 12px; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px;
+      color: var(--muted); background: #fff; font-size: 12px;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #18a957; }
+    .layout { flex: 1; display: grid; grid-template-columns: 300px minmax(0, 1fr); min-height: calc(100vh - 76px); }
+    .sidebar {
+      padding: 27px 20px 24px;
+      border-right: 1px solid var(--line);
+      background: rgba(255,253,251,.72);
+      overflow-y: auto;
+    }
+    .eyebrow { color: var(--accent); font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+    h1 { margin: 8px 0 8px; font: 700 26px/1.1 Georgia, serif; letter-spacing: -.02em; }
+    .intro { margin: 0 0 22px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .section-label { margin: 24px 0 10px; color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+    .doc-list { display: grid; gap: 9px; }
+    .doc-card {
+      width: 100%; text-align: left; padding: 13px 13px 12px;
+      border: 1px solid var(--line); border-radius: 13px;
+      background: #fff; color: var(--ink); transition: .18s ease;
+    }
+    .doc-card:hover { border-color: #d3b8b7; transform: translateY(-1px); }
+    .doc-card.active { border-color: var(--accent); background: var(--soft-red); box-shadow: 0 7px 20px rgba(200,16,46,.08); }
+    .doc-card .type { color: var(--accent); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .doc-card strong { display: block; margin-top: 5px; font-size: 13px; }
+    .doc-card small { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.4; }
+    .side-button {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 12px; border: 1px solid var(--line); border-radius: 10px;
+      color: var(--ink); background: #fff; font-weight: 700; font-size: 12px;
+    }
+    .side-button:hover { border-color: var(--accent); color: var(--accent); }
+    .note {
+      margin-top: 24px; padding: 14px; border-radius: 13px;
+      background: #f1ebe4; color: #655e57; font-size: 11px; line-height: 1.6;
+    }
+    .viewer-area { min-width: 0; padding: 23px; display: flex; flex-direction: column; gap: 14px; }
+    .viewer-toolbar {
+      display: flex; align-items: center; justify-content: space-between; gap: 14px;
+      padding: 12px 14px; border: 1px solid var(--line); border-radius: 13px;
+      background: rgba(255,253,251,.9); box-shadow: 0 5px 20px rgba(49,34,23,.04);
+    }
+    .current-file { min-width: 0; }
+    .current-file strong { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
+    .current-file span { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .toolbar-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .action {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+      min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 9px;
+      color: var(--ink); background: #fff; text-decoration: none; font-size: 12px; font-weight: 750;
+    }
+    .action:hover { border-color: var(--accent); color: var(--accent); }
+    .action.primary { border-color: var(--accent); color: #fff; background: var(--accent); }
+    .action.primary:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+    .pdf-frame-wrap {
+      position: relative; flex: 1; min-height: 650px; overflow: hidden;
+      border: 1px solid #d9d0c8; border-radius: 16px; background: #d8d0c8;
+      box-shadow: var(--shadow);
+    }
+    iframe { display: block; width: 100%; height: 100%; min-height: 650px; border: 0; background: #fff; }
+    .loading {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      color: var(--muted); font-size: 13px; pointer-events: none;
+    }
+    .viewer-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 11px; }
+    .viewer-footer span { max-width: 70ch; line-height: 1.5; }
+    input[type=file] { display: none; }
+    @media (max-width: 850px) {
+      .topbar { height: auto; padding: 16px 18px; align-items: flex-start; }
+      .top-actions .pill { display: none; }
+      .layout { display: block; }
+      .sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 20px 18px; }
+      .doc-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .note { display: none; }
+      .viewer-area { padding: 14px; }
+      .viewer-toolbar { align-items: flex-start; flex-direction: column; }
+      .toolbar-actions { justify-content: flex-start; }
+      .pdf-frame-wrap, iframe { min-height: 72vh; }
+    }
+    @media (max-width: 520px) {
+      .doc-list { grid-template-columns: 1fr; }
+      .brand-copy span { display: none; }
+      .viewer-footer { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">M+</div>
+        <div class="brand-copy">
+          <strong>SIWES Report Workspace</strong>
+          <span>Chapter One PDF viewer for Abollo David Obatare</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div class="pill"><span class="dot"></span> Local documents ready</div>
+        <label class="action primary" for="localPdf">＋ Open PDF</label>
+        <input id="localPdf" type="file" accept="application/pdf,.pdf" />
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="eyebrow">Document viewer</div>
+        <h1>Review your PDFs</h1>
+        <p class="intro">Choose a document below. The PDF opens inside this page, with a separate-tab option if your browser does not render the embedded view.</p>
+
+        <div class="section-label">Available documents</div>
+        <div class="doc-list" id="docList"></div>
+
+        <div class="section-label">Local file</div>
+        <label class="side-button" for="localPdf">＋ Open another PDF from your device</label>
+        <div class="note">
+          The fillable version contains editable PDF form fields. After changing text, use the browser PDF viewer's download or save option to keep your edited copy.
+        </div>
+      </aside>
+
+      <section class="viewer-area">
+        <div class="viewer-toolbar">
+          <div class="current-file">
+            <strong id="currentName">Chapter One: Introduction</strong>
+            <span id="currentMeta">Select a document to begin reviewing.</span>
+          </div>
+          <div class="toolbar-actions">
+            <a class="action" id="newTab" target="_blank" rel="noopener">↗ Open in new tab</a>
+            <a class="action primary" id="download" download>↓ Download</a>
+          </div>
+        </div>
+
+        <div class="pdf-frame-wrap">
+          <div class="loading" id="loading">Loading PDF…</div>
+          <iframe id="pdfFrame" title="PDF document viewer"></iframe>
+        </div>
+
+        <div class="viewer-footer">
+          <span id="status">Use the document controls above the preview to open or download the selected PDF.</span>
+          <span>Tip: if the preview is blank, choose “Open in new tab”.</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const documents = [
+      {
+        id: 'review',
+        name: 'Chapter One — Review PDF',
+        short: 'Static review copy',
+        path: 'Chapter_One_Introduction.pdf',
+        meta: 'Best for reading the layout and reviewing the chapter content.'
+      },
+      {
+        id: 'fillable',
+        name: 'Chapter One — Fillable PDF',
+        short: 'Editable PDF form copy',
+        path: 'Chapter_One_Introduction_Fillable.pdf',
+        meta: 'Click inside the light text fields to edit paragraphs, tables, and captions.'
+      }
+    ];
+
+    const list = document.getElementById('docList');
+    const frame = document.getElementById('pdfFrame');
+    const loading = document.getElementById('loading');
+    const currentName = document.getElementById('currentName');
+    const currentMeta = document.getElementById('currentMeta');
+    const status = document.getElementById('status');
+    const newTab = document.getElementById('newTab');
+    const download = document.getElementById('download');
+    let activeUrl = '';
+
+    function renderList() {
+      list.innerHTML = documents.map(doc => `
+        <button class="doc-card" data-id="${doc.id}">
+          <span class="type">PDF</span>
+          <strong>${doc.name}</strong>
+          <small>${doc.short}</small>
+        </button>
+      `).join('');
+      list.querySelectorAll('.doc-card').forEach(card => {
+        card.addEventListener('click', () => openDocument(documents.find(d => d.id === card.dataset.id)));
+      });
+    }
+
+    function openDocument(doc, urlOverride = null) {
+      if (!doc) return;
+      activeUrl = urlOverride || doc.path;
+      list.querySelectorAll('.doc-card').forEach(card => card.classList.toggle('active', card.dataset.id === doc.id));
+      currentName.textContent = doc.name;
+      currentMeta.textContent = doc.meta;
+      status.textContent = doc.id === 'fillable'
+        ? 'Editable PDF selected. Click inside a field after the preview loads, then save or download your edited copy.'
+        : 'Review copy selected. Use Open in new tab if your browser does not show the embedded preview.';
+      newTab.href = activeUrl;
+      download.href = activeUrl;
+      download.download = doc.path;
+      loading.style.display = 'grid';
+      frame.src = activeUrl + '#page=1&zoom=page-width&view=FitH';
+    }
+
+    frame.addEventListener('load', () => { loading.style.display = 'none'; });
+    document.getElementById('localPdf').addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const url = URL.createObjectURL(file);
+      const doc = { id: 'local', name: file.name, short: 'Opened from your device', path: url, meta: 'Local PDF loaded for review.' };
+      documents.push(doc);
+      renderList();
+      openDocument(doc, url);
+    });
+
+    renderList();
+    openDocument(documents[0]);
+  </script>
+</body>
+</html>
